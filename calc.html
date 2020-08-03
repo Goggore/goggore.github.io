@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="main">
+    <h1>Cents Calculator</h1>
+    <input type="text" style="width: 270px" name="number" readonly class="ans" id="ans">
+    <p style="color: #ff7add">From: </p>
+    <div class="fbuttons" id="from">
+        <button class = "from-buttons" value="0">A</button>
+        <button class = "from-buttons" value="1">A#</button>
+        <button class = "from-buttons" value="2">B</button>
+        <button class = "from-buttons" value="3">C</button>
+        <button class = "from-buttons" value="4">C#</button>
+        <button class = "from-buttons" value="5">D</button>
+        <button class = "from-buttons"  value="6">D#</button>
+        <button class = "from-buttons" value="7">E</button>
+        <button class = "from-buttons" value="8">F</button>
+        <button class = "from-buttons" value="9">F#</button>
+        <button class = "from-buttons" value="10">G</button>
+        <button class = "from-buttons" value="11">G#</button>
+    </div>
+    <p style="color: #b1ff3e">To: </p>
+    <div class="tbuttons" id="to">
+        <button class = "to-buttons" value="0">A</button>
+        <button class = "to-buttons" value="1">A#</button>
+        <button class = "to-buttons" value="2">B</button>
+        <button class = "to-buttons" value="3">C</button>
+        <button class = "to-buttons" value="4">C#</button>
+        <button class = "to-buttons" value="5">D</button>
+        <button class = "to-buttons" value="6">D#</button>
+        <button class = "to-buttons" value="7">E</button>
+        <button class = "to-buttons" value="8">F</button>
+        <button class = "to-buttons" value="9">F#</button>
+        <button class = "to-buttons" value="10">G</button>
+        <button class = "to-buttons" value="11">G#</button>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script>
+    var from = null;
+    var from_name = null;
+    var act_f = null;
+    var to = null;
+    var to_name = null;
+    var act_t = null;
+    $(document).ready(function(){
+
+        $(".from-buttons").on("click",function(){
+            if (act_f != null) {
+                act_f.css("background-color", "#8292a2")
+            }
+            $(this).css("background-color", "#9c3102");
+            from = $(this).attr('value');
+            from_name = $(this).text();
+            display();
+            act_f = $(this);
+        });
+        $(".to-buttons").on("click",function(){
+            if (act_t != null) {
+                act_t.css("background-color", "#8292a2")
+            }
+            $(this).css("background-color", "#F9F9F9");
+            to = $(this).attr('value');
+            to_name = $(this).text();
+            display();
+            act_t = $(this);
+        });
+
+    });
+    function display() {
+        if (from != null && to != null) {
+            var gap = from - to;
+            if (gap >= 0) {
+                $("#ans").val("lower " + gap*100 + " or raise " + (12 - gap)*100 +  " cents to reach " + to_name);
+            } else {
+                $("#ans").val("raise " + gap * (-100) + " or lower " + (gap + 12)*100 +  " cents to reach " + to_name);
+            }
+        }
+    }
+</script>
+</body>
+</html>
